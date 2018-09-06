@@ -1,17 +1,15 @@
 <template>
-    <v-ons-page>
-        <v-ons-toolbar>
-            <div class="left">
-
-            </div>
-            <div class="center">
-                {{title}}
-            </div>
-            <div class="right">
-
-            </div>
-        </v-ons-toolbar>
-    </v-ons-page>
+    <v-ons-toolbar>
+        <div class="left">
+            <slot name="left"></slot>
+        </div>
+        <div class="center">
+            {{title}}
+        </div>
+        <div class="right">
+            <slot name="right"></slot>
+        </div>
+    </v-ons-toolbar>
 </template>
 
 <script>
