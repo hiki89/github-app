@@ -10,6 +10,7 @@
           </div>
           
             <empty-state v-if="this.repos.length === 0" type="repository"/>
+            <error404 v-if="this.err" />
           
           <v-ons-list-item v-for="repo in repos" :key="repo.id">
             <div class="left">
@@ -30,20 +31,23 @@ import debounce from 'lodash/debounce'
 import AppToolbar from './components/AppToolbar'
 import AppSearch from './components/AppSearch'
 import EmptyState from './components/EmptyState'
+import error404 from './components/404'
 import {gitHub} from './services/GitHub'
  
 export default {
   components: {
     AppToolbar,
     AppSearch,
-    EmptyState
+    EmptyState,
+    error404
   },
 
   data() {
     return {
       query: '',
       repos: [],
-      loadingRepos: false
+      loadingRepos: false,
+      err: false
     }
   },
 
@@ -54,6 +58,9 @@ export default {
       .then((response) => {
         this.repos = response.data
         console.log(this.repos)
+      })
+      .catch(() => {
+        this.err = true
       })
       .finally(() => {
         this.loadingRepos = false
