@@ -4,7 +4,7 @@
       <div class="center">
         <app-search :query.sync="query"/>
         <div>
-        <v-ons-button>View Profile</v-ons-button>
+        <v-ons-button @click="goProfile">View Profile</v-ons-button>
         </div>
         <v-ons-list>
           <v-ons-list-header>{{`Repositories of ${this.query}`}}</v-ons-list-header>
@@ -36,6 +36,7 @@ import AppSearch from './AppSearch'
 import EmptyState from './EmptyState'
 import error404 from './404'
 import {gitHub} from './../services/GitHub'
+import profile from './Profile'
  
 export default {
   components: {
@@ -87,7 +88,9 @@ export default {
     //   })
       
     // }
-    
+    goProfile() {
+        this.$emit('next-page', profile)
+    }
   }
 };
 </script>
