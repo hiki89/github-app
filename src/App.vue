@@ -8,6 +8,9 @@
           <div v-if="this.loadingRepos">
           <v-ons-progress-circular indeterminate></v-ons-progress-circular>
           </div>
+          
+            <empty-state v-if="this.repos.length === 0" type="repository"/>
+          
           <v-ons-list-item v-for="repo in repos" :key="repo.id">
             <div class="left">
               <img class="list-item__thumbnail" :src="repo.owner.avatar_url">
@@ -26,12 +29,14 @@ import debounce from 'lodash/debounce'
 
 import AppToolbar from './components/AppToolbar'
 import AppSearch from './components/AppSearch'
+import EmptyState from './components/EmptyState'
 import {gitHub} from './services/GitHub'
  
 export default {
   components: {
     AppToolbar,
-    AppSearch
+    AppSearch,
+    EmptyState
   },
 
   data() {
